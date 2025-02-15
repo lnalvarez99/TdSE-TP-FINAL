@@ -1,0 +1,2 @@
+En principio el archivo .c configura los pines en donde estaran conectados los botones y los switches, donde la configuracion es pull up, es decir
+estan conectados a tierra y su valor en alto sera RESET (cuando se presione el boton y deje de circuar corriente)
