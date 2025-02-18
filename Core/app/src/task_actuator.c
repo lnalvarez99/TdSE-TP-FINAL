@@ -60,20 +60,49 @@
 
 /********************** internal data declaration ****************************/
 
-/* task_actuator_dta_list[]  contienen las condifguraciones (pin, puerto, entre otros)
-   de los actuadores  */
+/* Definiciones de las macros estan en board.h*/
 
 const task_actuator_cfg_t task_actuator_cfg_list[] = {
-	{ID_LED_MAX_VEL,  LED_MAX_VEL_PORT,  LED_MAX_VEL_PIN, LED_MAX_VEL_ON,
-			LED_MAX_VEL_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED_MIN_VEL,  LED_MIN_VEL_PORT,  LED_MIN_VEL_PIN, LED_MIN_VEL_ON,
-			LED_MIN_VEL_OFF,DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED_SYS_ACT,  LED_SYS_ACT_PORT,  LED_SYS_ACT_PIN, LED_SYS_ACT_ON,
-			LED_SYS_ACT_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_LED_SYS_DIS,  LED_SYS_DIS_PORT,  LED_SYS_DIS_PIN, LED_SYS_DIS_ON,
-			LED_SYS_DIS_OFF, DEL_LED_XX_BLI, DEL_LED_XX_PUL},
-	{ID_BUZZER,  BUZZER_PORT,  BUZZER_PIN, BUZZER_ON,  BUZZER_OFF,
-	 DEL_LED_XX_BLI, DEL_LED_XX_PUL},
+
+			{ID_LED_SYS_DIS,
+			LED_SYS_DIS_PORT,
+			LED_SYS_DIS_PIN,
+			LED_SYS_DIS_ON,//PIN_SET
+			LED_SYS_DIS_OFF,
+			DEL_LED_XX_BLI,
+			DEL_LED_XX_PUL},
+
+			{ID_LED_SYS_ACT,
+			LED_SYS_ACT_PORT,
+			LED_SYS_ACT_PIN,
+			LED_SYS_ACT_ON,//PIN_SET
+			LED_SYS_ACT_OFF,
+			DEL_LED_XX_BLI,
+			DEL_LED_XX_PUL},
+
+			{ID_LED_MAX_VEL,
+			LED_MAX_VEL_PORT,
+			LED_MAX_VEL_PIN,
+			LED_MAX_VEL_ON,//PIN_SET
+			LED_MAX_VEL_OFF,
+			DEL_LED_XX_BLI,
+			DEL_LED_XX_PUL},
+
+			{ID_LED_MIN_VEL,
+			LED_MIN_VEL_PORT,
+			LED_MIN_VEL_PIN,
+			LED_MIN_VEL_ON,//PIN_SET
+			LED_MIN_VEL_OFF,
+			DEL_LED_XX_BLI,
+			DEL_LED_XX_PUL},
+
+			{ID_BUZZER,
+			BUZZER_PORT,
+			BUZZER_PIN,
+			BUZZER_ON, //PIN_SET
+			BUZZER_OFF,
+			DEL_LED_XX_BLI,
+			DEL_LED_XX_PUL},
 
 };
 
@@ -82,12 +111,35 @@ const task_actuator_cfg_t task_actuator_cfg_list[] = {
 /* task_actuator_cfg_list[] contiene las condiciones iniciales de los actuadores*/
 
 task_actuator_dta_t task_actuator_dta_list[] = {
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
-	{DEL_LED_XX_MIN, ST_LED_XX_OFF, EV_LED_XX_OFF, false},
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
+
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
+
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
+
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
+
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
+
+	{DEL_LED_XX_MIN,
+	ST_LED_XX_OFF,
+	EV_LED_XX_OFF,
+	false},
 };
 
 #define ACTUATOR_DTA_QTY	(sizeof(task_actuator_dta_list)/sizeof(task_actuator_dta_t))
@@ -262,7 +314,7 @@ void task_actuator_update(void *parameters)
 						}
 				break;
 
-				case ST_LED_XX_BLINK_ON:
+				case ST_LED_XX_BLINK:
 
 					switch(p_task_actuator_dta->event){
 

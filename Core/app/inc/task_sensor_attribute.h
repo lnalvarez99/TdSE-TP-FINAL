@@ -55,7 +55,7 @@ extern "C" {
  * 	|=======================+=======================+=======================+=======================+=======================|
  * 	| ST_BTN_XX_UP          | EV_BTN_XX_UP          |                       | ST_BTN_XX_UP          |                       |
  * 	|                       +-----------------------+-----------------------+-----------------------+-----------------------|
- * 	|                       | EV_BTN_XX_DOWN        |                       | ST_BTN_XX_FALLING     | tick = TICK_MAX       |
+ * 	|                       | EV_BTN_XX_DOWN        |                       | ST_BTN_XX_FALLING     | tick = DEL_BTN_XX_MAX |
  * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
  * 	| ST_BTN_XX_FALLING     | EV_BTN_XX_UP          | [tick >  0]           | ST_BTN_XX_FALLING     | tick--                |
  * 	|                       |                       +-----------------------+-----------------------+-----------------------|
@@ -66,7 +66,7 @@ extern "C" {
  * 	|                       |                       | [tick == 0]           | ST_BTN_XX_DOWN        | put_event_task_system |
  * 	|                       |                       |                       |                       |  (event)              |
  * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
- *	| ST_BTN_XX_DOWN        | EV_BTN_XX_UP          |                       | ST_BTN_XX_RISING      | tick = TICK_MAX       |
+ *	| ST_BTN_XX_DOWN        | EV_BTN_XX_UP          |                       | ST_BTN_XX_RISING      | tick = DEL_BTN_XX_MAX |
  * 	|                       +-----------------------+-----------------------+-----------------------+-----------------------|
  * 	|                       | EV_BTN_XX_DOWN        |                       | ST_BTN_XX_DOWN        |                       |
  * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
@@ -92,12 +92,12 @@ typedef enum task_sensor_st {ST_BTN_XX_UP,
 						     ST_BTN_XX_RISING} task_sensor_st_t;
 
 /* Identifier of Task Sensor */
-typedef enum task_sensor_id {ID_BTN_IN,/*Entrada de persona a la escalera*/
-							 ID_BTN_OUT,/*Salida de persona de la escalera*/
-							 ID_BTN_NEX,/*Next*/
-							 ID_BTN_ENT,/*Enter*/
-							 ID_BTN_TIN,/* Turn in (activar sistema)*/
-							 ID_SWITCH_TOF,/* Turn off (desactivar sistema)*/
+typedef enum task_sensor_id {ID_BTN_INGRESO,/*Entrada de persona a la escalera*/
+							 ID_BTN_EGRESO,/*Salida de persona de la escalera*/
+							 ID_BTN_NEXT,/*Next*/
+							 ID_BTN_ENTER,/*Enter*/
+							 ID_BTN_ON,/* Turn in (activar sistema)*/
+							 ID_SWITCH_OFF,/* Turn off (desactivar sistema)*/
 							 ID_SWITCH_BIR /* Barrera infraroja*/} task_sensor_id_t;
 
 typedef struct

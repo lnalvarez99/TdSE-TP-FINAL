@@ -29,14 +29,14 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- * @file   : task_system_attribute.h
+ * @file   : task_menu_attribute.h
  * @date   : Set 26, 2023
  * @author : Juan Manuel Cruz <jcruz@fi.uba.ar> <jcruz@frba.utn.edu.ar>
  * @version	v1.0.0
  */
 
-#ifndef TASK_INC_TASK_SYSTEM_ATTRIBUTE_H_
-#define TASK_INC_TASK_SYSTEM_ATTRIBUTE_H_
+#ifndef TASK_INC_TASK_MENU_ATTRIBUTE_H_
+#define TASK_INC_TASK_MENU_ATTRIBUTE_H_
 
 /********************** CPP guard ********************************************/
 #ifdef __cplusplus
@@ -47,54 +47,87 @@ extern "C" {
 
 /********************** macros ***********************************************/
 
+
+
+
 /********************** typedef **********************************************/
-/* System Statechart - State Transition Table */
+/* Menu Statechart - State Transition Table */
 /* 	------------------------+-----------------------+-----------------------+-----------------------+------------------------
  * 	| Current               | Event                 |                       | Next                  |                       |
  * 	| State                 | (Parameters)          | [Guard]               | State                 | Actions               |
  * 	|=======================+=======================+=======================+=======================+=======================|
- * 	| ST_SYS_XX_IDLE        | EV_SYS_XX_ACTIVE      |                       | ST_SYS_XX_ACTIVE      | put_event_t.._actuator|
- * 	|                       |                       |                       |                       | (event, identifier)   |
+ * 	| ST_MEN_XX_IDLE        | EV_MEN_MAN_IDLE     |                       | ST_MEN_XX_ACTIVE      |                       |
+ * 	|                       |                       |                       |                       |                       |
  * 	|-----------------------+-----------------------+-----------------------+-----------------------+-----------------------|
- * 	| ST_SYS_XX_ACTIVE      | EV_SYS_XX_IDLE        |                       | ST_SYS_XX_IDLE        | put_event_t.._actuator|
- * 	|                       |                       |                       |                       | (event, identifier)   |
+ * 	| ST_MEN_XX_ACTIVE      | EV_MEN_MAN_IDLE       |                       | ST_MEN_XX_IDLE        |                       |
+ * 	|                       |                       |                       |                       |                       |
  * 	------------------------+-----------------------+-----------------------+-----------------------+------------------------
  */
 
-/* Events to excite Task System */
-typedef enum task_system_ev {EV_SYS_BTN_INGRESO_IDLE,
-							 EV_SYS_BTN_INGRESO_ACTIVE,
-							 EV_SYS_BTN_EGRESO_IDLE,
-							 EV_SYS_BTN_EGRESO_ACTIVE,
-							 EV_SYS_BTN_ON_IDLE,
-							 EV_SYS_BTN_ON_ACTIVE,
-							 EV_SYS_SWITCH_OFF_IDLE,
-							 EV_SYS_SWITCH_OFF_ACTIVE,
-							 EV_SYS_SWITCH_BIR_IDLE,
-							 EV_SYS_SWITCH_BIR_ACTIVE,
-							 EV_SYS_BTN_ENTER_ACTIVE,
-							 EV_SYS_BTN_ENTER_IDLE
-							} task_system_ev_t;
+/* Events to excite Task Menu */
+typedef enum task_menu_ev {
+						   EV_MEN_ENT_IDLE,
+						   EV_MEN_ENT_ACTIVE,
+						   EV_MEN_NEX_IDLE,
+						   EV_MEN_NEX_ACTIVE,
+						   EV_MEN_ON_ACTIVE,
+						   EV_MEN_ON_IDLE,
+						} task_menu_ev_t;
 
-/* State of Task System */
-typedef enum task_system_st {ST_SYS_XX_IDLE,
-							 ST_SYS_XX_NORMAL,
-							 ST_SYS_XX_STOP,
-							 ST_SYS_XX_OFF
-							 } task_system_st_t;
+/* State of Task Menu */
+typedef enum task_menu_st {ST_MEN_XX_IDLE,
+						   ST_MEN_XX_ACTIVE,
+						   ST_MAIN_MENU,
+						   ST_01_MENU,
+						   ST_02_MENU,
+							} task_menu_st_t;
+
+						  /* State of Task Menu */
+
+typedef enum task_menu_1_st { SET_UP_TIEMPO_CONMUTA_FALLA_MEN_1,
+							  SET_UP_TIEMPO_REPORTA_FALLA_MEN_1,
+							  SET_UP_SET_POINT_TEMPERATURA_MEN_1
+											}task_menu_1_st_t;
+
+
+typedef enum task_menu_2_st {
+	                              SET_UP_TIEMPO_CONMUTA_FALLA_MEN_2,
+								  SET_UP_TIEMPO_REPORTA_FALLA_MEN_2,
+								  SET_UP_SET_POINT_TEMPERATURA_MEN_2
+											}task_menu_2_st_t;
 
 typedef struct
 {
-	uint16_t			tick; // contador para la cantidad de personas sobre la escalera
-	uint16_t			cntd_personas; // Guarda para la cantidad de personas
-	uint16_t			timer; // Guarda para el tiempo de espera
-	task_system_st_t	state;
-	task_system_ev_t	event;
-	bool				flag;
-} task_system_dta_t;
+	uint32_t		tick;
+	task_menu_st_t	state;
+	task_menu_ev_t	event;
+	bool			flag;
+	bool			flag_1;
+
+} task_menu_dta_t;
+
+typedef struct
+{
+	uint32_t		sub_menu_1;
+	uint32_t		sub_menu_2;
+
+} task_sub_menu_dta_t;
+
+
+
+
+
+typedef struct
+{	uint32_t       tiempo_conmuta_falla;
+	uint32_t       tiempo_reporta_falla;
+	uint32_t	   set_point_temperatura;
+
+} task_menu_set_up_dta_t;
+
 
 /********************** external data declaration ****************************/
-extern task_system_dta_t task_system_dta;
+extern task_menu_dta_t        task_menu_dta;
+extern task_menu_set_up_dta_t  task_menu_set_up_dta;
 
 /********************** external functions declaration ***********************/
 
@@ -103,7 +136,6 @@ extern task_system_dta_t task_system_dta;
 }
 #endif
 
-#endif /* TASK_INC_TASK_SYSTEM_ATTRIBUTE_H_ */
+#endif /* TASK_INC_TASK_MENU_ATTRIBUTE_H_ */
 
 /********************** end of file ******************************************/
-

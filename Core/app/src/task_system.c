@@ -63,7 +63,7 @@
 
 /********************** internal data declaration ****************************/
 task_system_dta_t task_system_dta =
-	{0,0,0, ST_SYSCTRL_OFF, EV_BTN_SYSCTRL_UP, false};
+	{DEL_SYS_XX_MIN,0,0, ST_SYS_XX_OFF, EV_SYS_BTN_ON_IDLE, false};
 
 #define SYSTEM_DTA_QTY	(sizeof(task_system_dta)/sizeof(task_system_dta_t))
 
@@ -158,13 +158,171 @@ void task_system_update(void *parameters)
 		if (true == any_event_task_system())
 		{
 			p_task_system_dta->flag = true;
-			p_task_system_dta->event = get_event_task_system();
+			p_task_system_dta->event = get_event_task_system(); //Aca levanto los eventos generados por los sensores
+		}
+
+		if(HAL_GPIO_ReadPin(SWITCH_OFF_PORT, SWITCH_OFF_PIN) == SWITCH_OFF_PRESSED )
+		{
+			p_task_system_dta->event = EV_SYS_SWITCH_OFF_ACTIVE;
+		}
+
+		if(HAL_GPIO_ReadPin(BTN_ON_PORT, BTN_ON_PIN) == BTN_ON_PRESSED )
+		{
+			p_task_system_dta->event = EV_SYS_BTN_ON_ACTIVE;
+		}
+		if(HAL_GPIO_ReadPin(BTN_INGRESO_PORT, BTN_INGRESO_PIN) == BTN_INGRESO_PRESSED )
+		{
+			p_task_system_dta->event = EV_SYS_BTN_INGRESO_ACTIVE;
+		}
+		if(HAL_GPIO_ReadPin(BTN_EGRESO_PORT, BTN_EGRESO_PIN) == BTN_EGRESO_PRESSED)
+		{
+			p_task_system_dta->event = EV_SYS_BTN_EGRESO_ACTIVE;
+		}
+		if(HAL_GPIO_ReadPin(SWITCH_BIR_PORT, SWITCH_BIR_PIN) == SWITCH_BIR_PRESSED)
+		{
+			p_task_system_dta->event = EV_SYS_SWITCH_BIR_ACTIVE;
 		}
 
 		switch (p_task_system_dta->state)
 		{
+			/* CASO SISTEMA APAGADO*/
+			case ST_SYS_XX_OFF:
+			{
+				p_task_system_dta->flag = false;
+				switch(p_task_system_dta->event)
+				{
 
+				case EV_SYS_SWITCH_OFF_ACTIVE:
+					put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_DIS);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+					p_task_system_dta->state = ST_SYS_XX_OFF;
+
+				case EV_SYS_BTN_ON_IDLE:
+					put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_SYSCTRL_ACT);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_DIS);
+					p_task_system_dta->state = ST_SYS_XX_NORMAL;
+				}
+			}
+			break;
+
+			/* CASO SISTEMA MODO NORMAL*/
+			case ST_SYS_XX_NORMAL:
+			{
+				p_task_system_dta->flag = false;
+				switch(p_task_system_dta->event)
+				{
+					case EV_SYS_SWITCH_OFF_ACTIVE:
+						put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_DIS);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
+						p_task_system_dta->state = ST_SYS_XX_OFF;
+						break;
+
+					case EV_SYS_BTN_INGRESO_ACTIVE:
+						if(p_task_system_dta->tick++ > p_task_system_dta->cntd_prs)
+						{
+							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						else
+						{
+							put_event_task_actuator(EV_LED_XX_ON,ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						break;
+
+					case EV_SYS_BTN_EGRESO_ACTIVE:
+						if(p_task_system_dta->tick == 0)
+						{
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
+							p_task_system_dta->state= ST_SYS_XX_STOP;
+						}
+						if(p_task_system_dta->tick-- > p_task_system_dta->cntd_prs)
+						{
+							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						else
+						{
+							put_event_task_actuator(EV_LED_XX_ON,ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						break;
+
+					case EV_SYS_SWITCH_BIR_ACTIVE:
+						put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MAX_VEL);
+						put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
+						p_task_system_dta->tick=0;
+						p_task_system_dta->state= ST_SYS_XX_STOP;
+						break;
+				}
+			}
+			break;
+
+			/* CASO SISTEMA EN STOP*/
+			case ST_SYS_XX_STOP:
+				p_task_system_dta->flag = false;
+				switch(p_task_system_dta->event)
+				{
+					case EV_SYS_SWITCH_OFF_ACTIVE:
+						put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_DIS);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+						put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
+						p_task_system_dta->state = ST_SYS_XX_OFF;
+						break;
+
+					case EV_SYS_BTN_INGRESO_ACTIVE:
+						if(p_task_system_dta->timer == 0)
+						{
+							put_event_task_actuator(EV_LED_XX_OFF,ID_BUZZER);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_ACT);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->tick++;
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						else
+						{
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->tick++;
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						break;
+
+					default:
+						if(p_task_system_dta->timer == 0)
+						{
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_ON, ID_BUZZER);
+							p_task_system_dta->state = ST_SYS_XX_STOP;
+						}
+						else
+						{
+							p_task_system_dta->timer--;
+						}
+						break;
+				}
+			break;
 		}
+
+		default:
+			if(p_task_system_dta->event == EV_SYS_BTN_ON_ACTIVE)
+			{
+				put_event_task_actuator(EV_LED_XX_PULSE, ID_LED_SYSCTRL_ACT);
+				p_task_system_dta->state = ST_SYS_XX_IDLE;
+			}
 	}
 }
 

@@ -61,33 +61,103 @@
 
 /********************** internal data declaration ****************************/
 const task_sensor_cfg_t task_sensor_cfg_list[] = {
-	{ID_BTN_IN,  BTN_IN_PORT,  BTN_IN_PIN,  BTN_IN_PRESSED, DEL_BTN_XX_MAX,
-	 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_BTN_OUT,  BTN_OUT_PORT,  BTN_OUT_PIN,  BTN_OUT_PRESSED, DEL_BTN_XX_MAX,
-		 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_BTN_ENT,  BTN_ENT_PORT,  BTN_ENT_PIN,  BTN_ENT_PRESSED, DEL_BTN_XX_MAX,
-		 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_BTN_NEX,  BTN_NEX_PORT,  BTN_NEX_PIN,  BTN_NEX_PRESSED, DEL_BTN_XX_MAX,
-		 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_BTN_TIN,  BTN_TIN_PORT,  BTN_TIN_PIN,  BTN_TIN_PRESSED, DEL_BTN_XX_MAX,
-		 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_SWITCH_TOF,  SWITCH_TOF_PORT,  SWITCH_TOF_PIN,  SWITCH_TOF_PRESSED, DEL_BTN_XX_MAX,
-		 		 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
-	{ID_SWITCH_BIR,  SWITCH_BIR_PORT,  SWITCH_BIR_PIN,  SWITCH_BIR_PRESSED, DEL_BTN_XX_MAX,
-				 EV_SYS_XX_IDLE,  EV_SYS_XX_ACTIVE},
+
+	/*Todos las definiciones de numero de puerto y pin, junto a la definicion
+	 de PRESSED (Si esta precionado cunado el pin se encuentra en estado alto (SET)
+	 o en estado bajo (RESET)*/
+
+	/*El prefijo SYS significa que afecta el boton simula ser un sensor real que interactua con el sistema
+	 y el prefijo MAN significa que el boton es utilizado para moverse sobre el menu*/
+
+	{ID_BTN_INGRESO, // Sensor (boton) que registra el ingreso de las personas
+	BTN_INGRESO_PORT,
+	BTN_INGRESO_PIN,
+	BTN_INGRESO_PRESSED, // GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_SYS_BTN_INGRESO_IDLE, // signal up (el boton entra en reposo cuando vuelve a estar en SET)
+	EV_SYS_BTN_INGRESO_ACTIVE // signal down (el boton esta activo cuando su estado es RESET)
+	},
+
+	{ID_BTN_EGRESO, // Sensor (boton) que registra el egreso de las personas
+	BTN_EGRESO_PORT,
+	BTN_EGRESO_PIN,
+	BTN_EGRESO_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_SYS_BTN_EGRESO_IDLE,
+	EV_SYS_BTN_EGRESO_ACTIVE},
+
+	{ID_BTN_ENTER, // Boton para ingresar a los modos "Normal" o "Set Up"
+	BTN_ENTER_PORT,
+	BTN_ENTER_PIN,
+	BTN_ENTER_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_MEN_BTN_ENTER_IDLE,
+	EV_MEN_BTN_ENTER_ACTIVE},
+
+	{ID_BTN_NEXT, // Boton para navegar entre las opciones "Normal" o "Set Up"
+	BTN_NEXT_PORT,
+	BTN_NEXT_PIN,
+	BTN_NEXT_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_MEN_BTN_NEXT_IDLE,
+	EV_MEN_BTN_NEXT_ACTIVE},
+
+	{ID_BTN_ON, // Boton para activar el sistema de control
+	BTN_ON_PORT,
+	BTN_ON_PIN,
+	BTN_ON_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_SYS_BTN_ON_IDLE,
+	EV_SYS_BTN_ON_ACTIVE},
+
+	{ID_SWITCH_OFF, // Switch para desactivar el sistema de control
+	SWITCH_SWITCH_OFF_PORT,
+	SWITCH_SWITCH_OFF_PIN,
+	SWITCH_SWITCH_OFF_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_SYS_SWITCH_OFF_IDLE,
+	EV_SYS_SWITCH_OFF_ACTIVE},
+
+	{ID_SWITCH_BIR, // Sensor (switch) que registra si hay personas sobre la escalera
+	SWITCH_BIR_PORT,
+	SWITCH_BIR_PIN,
+	SWITCH_BIR_PRESSED,// GPIO_PIN_RESET
+	DEL_BTN_XX_MAX,
+	EV_SYS_SWITCH_BIR_IDLE,
+	EV_SYS_SWITCH_BIR_ACTIVE},
 
 };
 
 #define SENSOR_CFG_QTY	(sizeof(task_sensor_cfg_list)/sizeof(task_sensor_cfg_t))
 
 task_sensor_dta_t task_sensor_dta_list[] = {
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
-	{DEL_BTN_XX_MIN, ST_BTN_XX_UP, EV_BTN_XX_UP},
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
+
+	{DEL_BTN_XX_MIN,
+	ST_BTN_XX_UP,
+	EV_BTN_XX_UP},
 };
 
 #define SENSOR_DTA_QTY	(sizeof(task_sensor_dta_list)/sizeof(task_sensor_dta_t))
@@ -194,9 +264,8 @@ void task_sensor_update(void *parameters)
 					if (EV_BTN_XX_DOWN == p_task_sensor_dta->event)
 					{
 						p_task_sensor_dta->state = ST_BTN_XX_FALLING;
-						p_task_sensor_dta->tick = p_task_sensor_cfg->tick_max;
-						/*put_event_task_system(p_task_sensor_cfg->signal_down);
-						p_task_sensor_dta->state = ST_BTN_XX_DOWN;*/
+						p_task_sensor_dta->tick = p_task_sensor_cfg->tick_max /*DEL_BTN_XX_MAX al incio de la iteracion*/ ;
+
 					}
 
 					break;
@@ -208,12 +277,27 @@ void task_sensor_update(void *parameters)
 					 CAMBIO AL SIGUIENTE ESTADO DETERMINADO POR LA TABLA DE ESTADOS */
 
 					if (p_task_sensor_dta->tick > 0 ){
+
 						p_task_sensor_dta->tick --;
+
 					}
-					else
-					{
-						p_task_sensor_dta->state = ST_BTN_XX_UP;
+
+					else {
+
+						if (EV_BTN_XX_DOWN == p_task_sensor_dta->event){
+
+							put_event_task_system(p_task_sensor_cfg->signal_down);
+							put_event_task_menu(p_task_sensor_cfg->signal_down);
+							p_task_sensor_dta->state = ST_BTN_XX_DOWN;
+
+						}
+
+						else{
+							p_task_sensor_dta->state = ST_BTN_XX_UP;
+
+						}
 					}
+
 					break;
 
 
@@ -245,8 +329,13 @@ void task_sensor_update(void *parameters)
 
 					   	   if (EV_BTN_XX_UP == p_task_sensor_dta->event)
 					   	   {
-					   		   put_event_task_menu(p_task_sensor_cfg->signal_up);
+					   		   put_event_task_menu(p_task_sensor_cfg->signal_up); // Pone un elemento en la cola (envia una señal alto al micro porduccida por el sensor marcado como INDEX
 					   		   put_event_task_system(p_task_sensor_cfg->signal_up);
+
+					   		   /* ¿ Porque se le pasa a las funciones put_event_task_menu() y put_event_task_system() una variable del tipo task_sensor_ev_t cuando en realidad
+					   		    deberia recibir task_menu_ev_t y task_system_ev_t y  respectivamente ? Se que es un enum pero no hay relacion directa y los eventos a los que
+					   		    estan igualados signal_up y signal_down no estan definidos en ningun lugar  */
+
 					   		   p_task_sensor_dta->state = ST_BTN_XX_UP;
 							}
 							else
