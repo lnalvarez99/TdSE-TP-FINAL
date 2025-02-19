@@ -48,6 +48,7 @@
 #include "board.h"
 #include "app.h"
 #include "task_sensor_attribute.h"
+#include "task_setup_attribute.h"
 #include "task_system_attribute.h"
 #include "task_system_interface.h"
 
@@ -64,7 +65,7 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 
 	/*Todos las definiciones de numero de puerto y pin, junto a la definicion
 	 de PRESSED (Si esta precionado cunado el pin se encuentra en estado alto (SET)
-	 o en estado bajo (RESET)*/
+	 o en estado bajo (RESET) se encuentran en board.h*/
 
 	/*El prefijo SYS significa que afecta el boton simula ser un sensor real que interactua con el sistema
 	 y el prefijo MAN significa que el boton es utilizado para moverse sobre el menu*/
@@ -91,16 +92,16 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	BTN_ENTER_PIN,
 	BTN_ENTER_PRESSED,// GPIO_PIN_RESET
 	DEL_BTN_XX_MAX,
-	EV_MEN_BTN_ENTER_IDLE,
-	EV_MEN_BTN_ENTER_ACTIVE},
+	EV_SETUP_BTN_ENTER_IDLE,
+	EV_SETUP_BTN_ENTER_ACTIVE},
 
 	{ID_BTN_NEXT, // Boton para navegar entre las opciones "Normal" o "Set Up"
 	BTN_NEXT_PORT,
 	BTN_NEXT_PIN,
 	BTN_NEXT_PRESSED,// GPIO_PIN_RESET
 	DEL_BTN_XX_MAX,
-	EV_MEN_BTN_NEXT_IDLE,
-	EV_MEN_BTN_NEXT_ACTIVE},
+	EV_SETUP_BTN_NEXT_IDLE,
+	EV_SETUP_BTN_NEXT_ACTIVE},
 
 	{ID_BTN_ON, // Boton para activar el sistema de control
 	BTN_ON_PORT,
@@ -287,7 +288,7 @@ void task_sensor_update(void *parameters)
 						if (EV_BTN_XX_DOWN == p_task_sensor_dta->event){
 
 							put_event_task_system(p_task_sensor_cfg->signal_down);
-							put_event_task_menu(p_task_sensor_cfg->signal_down);
+							put_event_task_setup(p_task_sensor_cfg->signal_down);
 							p_task_sensor_dta->state = ST_BTN_XX_DOWN;
 
 						}
@@ -329,13 +330,8 @@ void task_sensor_update(void *parameters)
 
 					   	   if (EV_BTN_XX_UP == p_task_sensor_dta->event)
 					   	   {
-					   		   put_event_task_menu(p_task_sensor_cfg->signal_up); // Pone un elemento en la cola (envia una señal alto al micro porduccida por el sensor marcado como INDEX
+					   		   put_event_task_setup(p_task_sensor_cfg->signal_up); // Pone un elemento en la cola (envia una señal alto al micro porduccida por el sensor marcado como INDEX
 					   		   put_event_task_system(p_task_sensor_cfg->signal_up);
-
-					   		   /* ¿ Porque se le pasa a las funciones put_event_task_menu() y put_event_task_system() una variable del tipo task_sensor_ev_t cuando en realidad
-					   		    deberia recibir task_menu_ev_t y task_system_ev_t y  respectivamente ? Se que es un enum pero no hay relacion directa y los eventos a los que
-					   		    estan igualados signal_up y signal_down no estan definidos en ningun lugar  */
-
 					   		   p_task_sensor_dta->state = ST_BTN_XX_UP;
 							}
 							else

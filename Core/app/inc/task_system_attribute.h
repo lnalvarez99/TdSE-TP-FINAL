@@ -72,8 +72,6 @@ typedef enum task_system_ev {EV_SYS_BTN_INGRESO_IDLE,
 							 EV_SYS_SWITCH_OFF_ACTIVE,
 							 EV_SYS_SWITCH_BIR_IDLE,
 							 EV_SYS_SWITCH_BIR_ACTIVE,
-							 EV_SYS_BTN_ENTER_ACTIVE,
-							 EV_SYS_BTN_ENTER_IDLE
 							} task_system_ev_t;
 
 /* State of Task System */
@@ -86,7 +84,7 @@ typedef enum task_system_st {ST_SYS_XX_IDLE,
 typedef struct
 {
 	uint16_t			tick; // contador para la cantidad de personas sobre la escalera
-	uint16_t			cntd_personas; // Guarda para la cantidad de personas
+	uint16_t			cantidad_personas; // Guarda para la cantidad de personas
 	uint16_t			timer; // Guarda para el tiempo de espera
 	task_system_st_t	state;
 	task_system_ev_t	event;

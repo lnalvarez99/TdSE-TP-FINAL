@@ -100,7 +100,8 @@ void task_system_init(void *parameters)
 
 	/*NOTA: Recordar que task_system_dta es una variable global declarada en task_system_attribute.h
 	 por eso creo el puntero de tipo task_system_dta_t llamado p_task_system_dta, para poder
-	 trabajar con ese tipo de variable*/
+	 trabajar con ese tipo de variable, podria usar directamente la variable global pero es buena
+	 practiva usar un puntero a su direccion de memoria y tabajar con el puntero*/
 
 	p_task_system_dta = &task_system_dta;
 
@@ -161,30 +162,73 @@ void task_system_update(void *parameters)
 			p_task_system_dta->event = get_event_task_system(); //Aca levanto los eventos generados por los sensores
 		}
 
-		if(HAL_GPIO_ReadPin(SWITCH_OFF_PORT, SWITCH_OFF_PIN) == SWITCH_OFF_PRESSED )
-		{
-			p_task_system_dta->event = EV_SYS_SWITCH_OFF_ACTIVE;
-		}
-
-		if(HAL_GPIO_ReadPin(BTN_ON_PORT, BTN_ON_PIN) == BTN_ON_PRESSED )
-		{
-			p_task_system_dta->event = EV_SYS_BTN_ON_ACTIVE;
-		}
-		if(HAL_GPIO_ReadPin(BTN_INGRESO_PORT, BTN_INGRESO_PIN) == BTN_INGRESO_PRESSED )
-		{
-			p_task_system_dta->event = EV_SYS_BTN_INGRESO_ACTIVE;
-		}
-		if(HAL_GPIO_ReadPin(BTN_EGRESO_PORT, BTN_EGRESO_PIN) == BTN_EGRESO_PRESSED)
-		{
-			p_task_system_dta->event = EV_SYS_BTN_EGRESO_ACTIVE;
-		}
-		if(HAL_GPIO_ReadPin(SWITCH_BIR_PORT, SWITCH_BIR_PIN) == SWITCH_BIR_PRESSED)
-		{
-			p_task_system_dta->event = EV_SYS_SWITCH_BIR_ACTIVE;
-		}
 
 		switch (p_task_system_dta->state)
 		{
+
+			case ST_SYS_XX_IDLE:
+			{
+				p_task_system_dta->flag = false;
+				switch(p_task_system_dta->event)
+				{
+					case EV_SYS_SWITCH_OFF_ACTIVE:
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_DIS);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
+							p_task_system_dta->state = ST_SYS_XX_OFF;
+					break;
+
+					case EV_SYS_BTN_INGRESO_ACTIVE:
+						if(p_task_system_dta->tick++ > p_task_system_dta->cantidad_personas)
+						{
+							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						else
+						{
+							put_event_task_actuator(EV_LED_XX_ON,ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+					break;
+
+					case EV_SYS_BTN_EGRESO_ACTIVE:
+						if(p_task_system_dta->tick == 0)
+						{
+							/*Cuando no hay personas en la escalera pongo a titilar a ambos led indicadores de velocidad*/
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
+							p_task_system_dta->state= ST_SYS_XX_STOP;
+						}
+						else if(p_task_system_dta->tick-- > p_task_system_dta->cantidad_personas)
+						{
+							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						else
+						{
+							put_event_task_actuator(EV_LED_XX_ON,ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+							p_task_system_dta->state = ST_SYS_XX_NORMAL;
+						}
+						break;
+
+						case EV_SYS_SWITCH_BIR_ACTIVE:
+							/*Cuando no hay personas en la escalera pongo a titilar a ambos led indicadores de velocidad*/
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MAX_VEL);
+							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
+							p_task_system_dta->tick=0;
+							p_task_system_dta->state= ST_SYS_XX_STOP;
+						break;
+
+				} // fin del switch
+
+			} break;
+
 			/* CASO SISTEMA APAGADO*/
 			case ST_SYS_XX_OFF:
 			{
@@ -195,12 +239,18 @@ void task_system_update(void *parameters)
 				case EV_SYS_SWITCH_OFF_ACTIVE:
 					put_event_task_actuator(EV_LED_XX_ON, ID_LED_SYSCTRL_DIS);
 					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_ACT);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
 					p_task_system_dta->state = ST_SYS_XX_OFF;
 
-				case EV_SYS_BTN_ON_IDLE:
+				case EV_SYS_BTN_ON_ACTIVE:
 					put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_SYSCTRL_ACT);
 					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_SYSCTRL_DIS);
-					p_task_system_dta->state = ST_SYS_XX_NORMAL;
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
+					put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
+					p_task_system_dta->state = ST_SYS_XX_IDLE;
 				}
 			}
 			break;
@@ -318,10 +368,12 @@ void task_system_update(void *parameters)
 		}
 
 		default:
-			if(p_task_system_dta->event == EV_SYS_BTN_ON_ACTIVE)
+			if(p_task_system_dta->event == EV_SYS_BTN_ON_IDLE)
 			{
 				put_event_task_actuator(EV_LED_XX_PULSE, ID_LED_SYSCTRL_ACT);
 				p_task_system_dta->state = ST_SYS_XX_IDLE;
+				/*Mientras el sistema este en reposo estoy dentro del modo setup y el
+				 led de sistema activo emite luz en forma de pulsos*/
 			}
 	}
 }

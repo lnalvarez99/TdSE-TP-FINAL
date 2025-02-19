@@ -29,52 +29,40 @@
  * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  *
- *
- * @file   : task_actuator_interface.c
+ * @file   : task_menu.h
  * @date   : Set 26, 2023
  * @author : Juan Manuel Cruz <jcruz@fi.uba.ar> <jcruz@frba.utn.edu.ar>
  * @version	v1.0.0
  */
 
+#ifndef TASK_INC_TASK_MENU_H_
+#define TASK_INC_TASK_MENU_H_
+
+/********************** CPP guard ********************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /********************** inclusions *******************************************/
-/* Project includes. */
-#include "main.h"
 
-/* Demo includes. */
-#include "logger.h"
-#include "dwt.h"
+/********************** macros ***********************************************/
 
-/* Application & Tasks includes. */
-#include "board.h"
-#include "app.h"
-#include "task_actuator_attribute.h"
-
-/********************** macros and definitions *******************************/
-
-/********************** internal data declaration ****************************/
-
-/********************** internal functions declaration ***********************/
-
-/********************** internal data definition *****************************/
+/********************** typedef **********************************************/
 
 /********************** external data declaration ****************************/
+extern uint32_t g_task_menu_cnt;
+extern volatile uint32_t g_task_menu_tick_cnt;
 
-/********************** external functions definition ************************/
-void put_event_task_actuator(task_actuator_ev_t event, task_actuator_id_t identifier)
-{
-	task_actuator_dta_t *p_task_actuator_dta; /* recordar que task_actuator_dta_list es una
-	 	 	 	 	 	 	 	 	 	 	 	variable global y p_task_actuator_dta
-	 	 	 	 	 	 	 	 	 	 	 	apunta a la direccion de memoria del
-	 	 	 	 	 	 	 	 	 	 	 	actuador designado por identifier*/
+/********************** external functions declaration ***********************/
+extern void task_setup_init(void *parameters);
+extern void task_setup_update(void *parameters);
 
-	p_task_actuator_dta = &task_actuator_dta_list[identifier];
-
-	p_task_actuator_dta->event = event;
-	p_task_actuator_dta->flag = true;
-
-	/*La funcion modifica el capo de "evento" del actuador provisto por "identifier" y le
-	 * pasa el evento "event"*/
+/********************** End of CPP guard *************************************/
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* TASK_INC_TASK_MENU_H_ */
 
 /********************** end of file ******************************************/
 

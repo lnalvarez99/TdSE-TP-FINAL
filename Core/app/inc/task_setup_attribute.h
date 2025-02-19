@@ -66,68 +66,41 @@ extern "C" {
 
 /* Events to excite Task Menu */
 typedef enum task_menu_ev {
-						   EV_MEN_ENT_IDLE,
-						   EV_MEN_ENT_ACTIVE,
-						   EV_MEN_NEX_IDLE,
-						   EV_MEN_NEX_ACTIVE,
-						   EV_MEN_ON_ACTIVE,
-						   EV_MEN_ON_IDLE,
-						} task_menu_ev_t;
+						   EV_SETUP_BTN_ENTER_IDLE,
+						   EV_SETUP_BTN_ENTER_ACTIVE,
+						   EV_SETUP_BTN_NEXT_IDLE,
+						   EV_SETUP_BTN_NEXT_ACTIVE,
+						} task_setup_ev_t;
 
 /* State of Task Menu */
-typedef enum task_menu_st {ST_MEN_XX_IDLE,
-						   ST_MEN_XX_ACTIVE,
-						   ST_MAIN_MENU,
-						   ST_01_MENU,
-						   ST_02_MENU,
-							} task_menu_st_t;
+typedef enum task_menu_st {ST_SETUP_IDLE,
+						   ST_SETUP_ACTIVE, // En este estado podria pasar por display las configuraciones del setup
+						   ST_SETUP_CFG_XX,
+						   ST_SETUP_CFG_01, // Pasar por display que se esta en configuracion 1
+						   ST_SETUP_CFG_02, // Pasar por display que se esta en configuracion 2
+							} task_setup_st_t;
 
-						  /* State of Task Menu */
-
-typedef enum task_menu_1_st { SET_UP_TIEMPO_CONMUTA_FALLA_MEN_1,
-							  SET_UP_TIEMPO_REPORTA_FALLA_MEN_1,
-							  SET_UP_SET_POINT_TEMPERATURA_MEN_1
-											}task_menu_1_st_t;
-
-
-typedef enum task_menu_2_st {
-	                              SET_UP_TIEMPO_CONMUTA_FALLA_MEN_2,
-								  SET_UP_TIEMPO_REPORTA_FALLA_MEN_2,
-								  SET_UP_SET_POINT_TEMPERATURA_MEN_2
-											}task_menu_2_st_t;
 
 typedef struct
 {
 	uint32_t		tick;
-	task_menu_st_t	state;
-	task_menu_ev_t	event;
-	bool			flag;
-	bool			flag_1;
+	task_setup_st_t	state;
+	task_setup_ev_t	event;
+	bool 			flag;
+	bool			flag_cfg_02;
 
-} task_menu_dta_t;
-
-typedef struct
-{
-	uint32_t		sub_menu_1;
-	uint32_t		sub_menu_2;
-
-} task_sub_menu_dta_t;
+} task_setup_dta_t;
 
 
-
-
-
-typedef struct
-{	uint32_t       tiempo_conmuta_falla;
-	uint32_t       tiempo_reporta_falla;
-	uint32_t	   set_point_temperatura;
-
-} task_menu_set_up_dta_t;
+/*typedef struct
+{	uint32_t       cantidad_personas;
+	uint32_t       tiempo_espera;
+} task_configuracion_dta_t;*/
 
 
 /********************** external data declaration ****************************/
-extern task_menu_dta_t        task_menu_dta;
-extern task_menu_set_up_dta_t  task_menu_set_up_dta;
+extern task_setup_dta_t        task_setup_dta;
+//extern task_configuracion_dta_t  task_configuracion_dta;
 
 /********************** external functions declaration ***********************/
 

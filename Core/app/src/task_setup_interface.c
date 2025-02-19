@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  *
- * @file   : task_actuator_interface.c
+ * @file   : task_menu_interface.c
  * @date   : Set 26, 2023
  * @author : Juan Manuel Cruz <jcruz@fi.uba.ar> <jcruz@frba.utn.edu.ar>
  * @version	v1.0.0
@@ -47,34 +47,69 @@
 /* Application & Tasks includes. */
 #include "board.h"
 #include "app.h"
-#include "task_actuator_attribute.h"
+#include "task_setup_attribute.h"
 
 /********************** macros and definitions *******************************/
+#define EVENT_UNDEFINED	(255)
+#define MAX_EVENTS		(5)
 
 /********************** internal data declaration ****************************/
 
 /********************** internal functions declaration ***********************/
 
 /********************** internal data definition *****************************/
+struct
+{
+	uint32_t	head;
+	uint32_t	tail;
+	uint32_t	count;
+	task_setup_ev_t	queue[MAX_EVENTS];
+} queue_task_a;
 
 /********************** external data declaration ****************************/
 
 /********************** external functions definition ************************/
-void put_event_task_actuator(task_actuator_ev_t event, task_actuator_id_t identifier)
+void init_queue_event_task_setup(void)
 {
-	task_actuator_dta_t *p_task_actuator_dta; /* recordar que task_actuator_dta_list es una
-	 	 	 	 	 	 	 	 	 	 	 	variable global y p_task_actuator_dta
-	 	 	 	 	 	 	 	 	 	 	 	apunta a la direccion de memoria del
-	 	 	 	 	 	 	 	 	 	 	 	actuador designado por identifier*/
+	uint32_t i;
 
-	p_task_actuator_dta = &task_actuator_dta_list[identifier];
+	queue_task_a.head = 0;
+	queue_task_a.tail = 0;
+	queue_task_a.count = 0;
 
-	p_task_actuator_dta->event = event;
-	p_task_actuator_dta->flag = true;
+	for (i = 0; i < MAX_EVENTS; i++)
+		queue_task_a.queue[i] = EVENT_UNDEFINED;
+}
 
-	/*La funcion modifica el capo de "evento" del actuador provisto por "identifier" y le
-	 * pasa el evento "event"*/
+void put_event_task_setup(task_setup_ev_t event)
+{
+	queue_task_a.count++;
+	queue_task_a.queue[queue_task_a.head++] = event;
+
+	if (MAX_EVENTS == queue_task_a.head)
+		queue_task_a.head = 0;
+}
+
+task_setup_ev_t get_event_task_menu(void)
+
+{
+	task_setup_ev_t event;
+
+	queue_task_a.count--;
+	event = queue_task_a.queue[queue_task_a.tail];
+	queue_task_a.queue[queue_task_a.tail++] = EVENT_UNDEFINED;
+
+	if (MAX_EVENTS == queue_task_a.tail)
+		queue_task_a.tail = 0;
+
+	return event;
+}
+
+bool any_event_task_setup(void)
+{
+  return (queue_task_a.head != queue_task_a.tail);
 }
 
 /********************** end of file ******************************************/
+
 
