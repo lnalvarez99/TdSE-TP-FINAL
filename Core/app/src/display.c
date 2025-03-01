@@ -2,9 +2,9 @@
 
 /********************** inclusions *******************************************/
 #include "display.h"
-#include "main.h"
+#include "board.h"
+#include "stm32f1xx_hal.h"
 #include <stdbool.h>
-#include "task_menu_attribute.h"
 /********************** arm_book Defines *******************************/
 //#include "arm_book_lib.h"
 // Functional states

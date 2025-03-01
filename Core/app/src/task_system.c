@@ -183,7 +183,7 @@ void task_system_update(void *parameters)
 					case EV_SYS_BTN_INGRESO_ACTIVE:
 						if(p_task_system_dta->tick++ > p_task_system_dta->cantidad_personas)
 						{
-							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MIN_VEL);
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
 							p_task_system_dta->state = ST_SYS_XX_NORMAL;
 						}
@@ -205,7 +205,7 @@ void task_system_update(void *parameters)
 						}
 						else if(p_task_system_dta->tick-- > p_task_system_dta->cantidad_personas)
 						{
-							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MIN_VEL);
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
 							p_task_system_dta->state = ST_SYS_XX_NORMAL;
 						}
@@ -215,15 +215,19 @@ void task_system_update(void *parameters)
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
 							p_task_system_dta->state = ST_SYS_XX_NORMAL;
 						}
-						break;
+					break;
 
-						case EV_SYS_SWITCH_BIR_ACTIVE:
+					case EV_SYS_SWITCH_BIR_ACTIVE:
 							/*Cuando no hay personas en la escalera pongo a titilar a ambos led indicadores de velocidad*/
 							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MAX_VEL);
 							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
 							p_task_system_dta->tick=0;
 							p_task_system_dta->state= ST_SYS_XX_STOP;
-						break;
+					break;
+
+					case EV_SYS_BTN_INGRESO_IDLE:
+
+					break;
 
 				} // fin del switch
 
@@ -231,7 +235,6 @@ void task_system_update(void *parameters)
 
 			/* CASO SISTEMA APAGADO*/
 			case ST_SYS_XX_OFF:
-			{
 				p_task_system_dta->flag = false;
 				switch(p_task_system_dta->event)
 				{
@@ -251,13 +254,17 @@ void task_system_update(void *parameters)
 					put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MIN_VEL);
 					put_event_task_actuator(EV_LED_XX_OFF, ID_BUZZER);
 					p_task_system_dta->state = ST_SYS_XX_IDLE;
+
+				default:
+					break;
+
 				}
-			}
+
 			break;
 
 			/* CASO SISTEMA MODO NORMAL*/
 			case ST_SYS_XX_NORMAL:
-			{
+
 				p_task_system_dta->flag = false;
 				switch(p_task_system_dta->event)
 				{
@@ -271,9 +278,9 @@ void task_system_update(void *parameters)
 						break;
 
 					case EV_SYS_BTN_INGRESO_ACTIVE:
-						if(p_task_system_dta->tick++ > p_task_system_dta->cntd_prs)
+						if(p_task_system_dta->tick++ > p_task_system_dta->cantidad_personas)
 						{
-							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MIN_VEL);
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
 							p_task_system_dta->state = ST_SYS_XX_NORMAL;
 						}
@@ -292,7 +299,7 @@ void task_system_update(void *parameters)
 							put_event_task_actuator(EV_LED_XX_BLINK, ID_LED_MIN_VEL);
 							p_task_system_dta->state= ST_SYS_XX_STOP;
 						}
-						if(p_task_system_dta->tick-- > p_task_system_dta->cntd_prs)
+						if(p_task_system_dta->tick-- > p_task_system_dta->cantidad_personas)
 						{
 							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
@@ -313,11 +320,11 @@ void task_system_update(void *parameters)
 						p_task_system_dta->state= ST_SYS_XX_STOP;
 						break;
 				}
-			}
 			break;
 
 			/* CASO SISTEMA EN STOP*/
 			case ST_SYS_XX_STOP:
+
 				p_task_system_dta->flag = false;
 				switch(p_task_system_dta->event)
 				{
@@ -364,8 +371,8 @@ void task_system_update(void *parameters)
 						}
 						break;
 				}
-			break;
-		}
+
+			break; // Fin case ST_SYS_XX_STOP:
 
 		default:
 			if(p_task_system_dta->event == EV_SYS_BTN_ON_IDLE)
@@ -375,6 +382,7 @@ void task_system_update(void *parameters)
 				/*Mientras el sistema este en reposo estoy dentro del modo setup y el
 				 led de sistema activo emite luz en forma de pulsos*/
 			}
+		}
 	}
 }
 

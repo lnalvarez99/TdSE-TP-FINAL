@@ -49,6 +49,7 @@
 #include "app.h"
 #include "task_sensor_attribute.h"
 #include "task_setup_attribute.h"
+#include "task_setup_interface.h"
 #include "task_system_attribute.h"
 #include "task_system_interface.h"
 
@@ -66,9 +67,6 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	/*Todos las definiciones de numero de puerto y pin, junto a la definicion
 	 de PRESSED (Si esta precionado cunado el pin se encuentra en estado alto (SET)
 	 o en estado bajo (RESET) se encuentran en board.h*/
-
-	/*El prefijo SYS significa que afecta el boton simula ser un sensor real que interactua con el sistema
-	 y el prefijo MAN significa que el boton es utilizado para moverse sobre el menu*/
 
 	{ID_BTN_INGRESO, // Sensor (boton) que registra el ingreso de las personas
 	BTN_INGRESO_PORT,
@@ -112,17 +110,17 @@ const task_sensor_cfg_t task_sensor_cfg_list[] = {
 	EV_SYS_BTN_ON_ACTIVE},
 
 	{ID_SWITCH_OFF, // Switch para desactivar el sistema de control
-	SWITCH_SWITCH_OFF_PORT,
-	SWITCH_SWITCH_OFF_PIN,
-	SWITCH_SWITCH_OFF_PRESSED,// GPIO_PIN_RESET
+	SWITCH_OFF_PORT,
+	SWITCH_OFF_PIN,
+	SWITCH_OFF_PRESSED,// GPIO_PIN_RESET
 	DEL_BTN_XX_MAX,
 	EV_SYS_SWITCH_OFF_IDLE,
 	EV_SYS_SWITCH_OFF_ACTIVE},
 
 	{ID_SWITCH_BIR, // Sensor (switch) que registra si hay personas sobre la escalera
-	SWITCH_BIR_PORT,
-	SWITCH_BIR_PIN,
-	SWITCH_BIR_PRESSED,// GPIO_PIN_RESET
+	SWITCH_BARINF_PORT,
+	SWITCH_BARINF_PIN,
+	SWITCH_BARINF_PRESSED,// GPIO_PIN_RESET
 	DEL_BTN_XX_MAX,
 	EV_SYS_SWITCH_BIR_IDLE,
 	EV_SYS_SWITCH_BIR_ACTIVE},

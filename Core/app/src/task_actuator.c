@@ -64,46 +64,45 @@
 
 const task_actuator_cfg_t task_actuator_cfg_list[] = {
 
-			{ID_LED_SYS_DIS,
-			LED_SYS_DIS_PORT,
-			LED_SYS_DIS_PIN,
-			LED_SYS_DIS_ON,//PIN_SET
-			LED_SYS_DIS_OFF,
-			DEL_LED_XX_BLI,
-			DEL_LED_XX_PUL},
+					{ID_LED_SYSCTRL_DIS,
+					LED_SYSCTRL_DIS_PORT,
+					LED_SYSCTRL_DIS_PIN,
+					LED_SYSCTRL_DIS_ON,//PIN_SET
+					LED_SYSCTRL_DIS_OFF,
+					DEL_LED_XX_BLI,
+					DEL_LED_XX_PUL},
 
-			{ID_LED_SYS_ACT,
-			LED_SYS_ACT_PORT,
-			LED_SYS_ACT_PIN,
-			LED_SYS_ACT_ON,//PIN_SET
-			LED_SYS_ACT_OFF,
-			DEL_LED_XX_BLI,
-			DEL_LED_XX_PUL},
+					{ID_LED_SYSCTRL_ACT,
+					LED_SYSCTRL_ACT_PORT,
+					LED_SYSCTRL_ACT_PIN,
+					LED_SYSCTRL_ACT_ON,//PIN_SET
+					LED_SYSCTRL_ACT_OFF,
+					DEL_LED_XX_BLI,
+					DEL_LED_XX_PUL},
 
-			{ID_LED_MAX_VEL,
-			LED_MAX_VEL_PORT,
-			LED_MAX_VEL_PIN,
-			LED_MAX_VEL_ON,//PIN_SET
-			LED_MAX_VEL_OFF,
-			DEL_LED_XX_BLI,
-			DEL_LED_XX_PUL},
+					{ID_LED_MAX_VEL,
+					LED_MAX_VEL_PORT,
+					LED_MAX_VEL_PIN,
+					LED_MAX_VEL_ON,//PIN_SET
+					LED_MAX_VEL_OFF,
+					DEL_LED_XX_BLI,
+					DEL_LED_XX_PUL},
 
-			{ID_LED_MIN_VEL,
-			LED_MIN_VEL_PORT,
-			LED_MIN_VEL_PIN,
-			LED_MIN_VEL_ON,//PIN_SET
-			LED_MIN_VEL_OFF,
-			DEL_LED_XX_BLI,
-			DEL_LED_XX_PUL},
+					{ID_LED_MIN_VEL,
+					LED_MIN_VEL_PORT,
+					LED_MIN_VEL_PIN,
+					LED_MIN_VEL_ON,//PIN_SET
+					LED_MIN_VEL_OFF,
+					DEL_LED_XX_BLI,
+					DEL_LED_XX_PUL},
 
-			{ID_BUZZER,
-			BUZZER_PORT,
-			BUZZER_PIN,
-			BUZZER_ON, //PIN_SET
-			BUZZER_OFF,
-			DEL_LED_XX_BLI,
-			DEL_LED_XX_PUL},
-
+					{ID_BUZZER,
+					BUZZER_PORT,
+					BUZZER_PIN,
+					BUZZER_ON, //PIN_SET
+					BUZZER_OFF,
+					DEL_LED_XX_BLI,
+					DEL_LED_XX_PUL},
 };
 
 #define ACTUATOR_CFG_QTY	(sizeof(task_actuator_cfg_list)/sizeof(task_actuator_cfg_t))
@@ -111,7 +110,8 @@ const task_actuator_cfg_t task_actuator_cfg_list[] = {
 /* task_actuator_cfg_list[] contiene las condiciones iniciales de los actuadores*/
 
 task_actuator_dta_t task_actuator_dta_list[] = {
-	{DEL_LED_XX_MIN,
+
+		{DEL_LED_XX_MIN,
 	ST_LED_XX_OFF,
 	EV_LED_XX_OFF,
 	false},

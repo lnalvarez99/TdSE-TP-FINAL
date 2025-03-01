@@ -44,7 +44,7 @@ extern "C" {
 #endif
 
 /********************** inclusions *******************************************/
-
+#include "task_setup_attribute.h"
 /********************** macros ***********************************************/
 
 /********************** typedef **********************************************/
@@ -62,7 +62,7 @@ extern bool any_event_task_setup(void);
 }
 #endif
 
-#endif /* TASK_INC_TASK_SETUP_INTERFACE_H_ */
+#endif // TASK_INC_TASK_SETUP_INTERFACE_H_
 
 /********************** end of file ******************************************/
 

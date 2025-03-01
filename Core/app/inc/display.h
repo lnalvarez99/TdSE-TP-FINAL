@@ -1,9 +1,3 @@
-/*
- * display.h
- *
- *  Created on: Feb 1, 2025
- *      Author: lauta
- */
 
 
 #ifndef INC_DISPLAY_H_

@@ -92,15 +92,15 @@ typedef struct
 } task_setup_dta_t;
 
 
-/*typedef struct
+typedef struct
 {	uint32_t       cantidad_personas;
 	uint32_t       tiempo_espera;
-} task_configuracion_dta_t;*/
+} task_configuration_dta_t;
 
 
 /********************** external data declaration ****************************/
 extern task_setup_dta_t        task_setup_dta;
-//extern task_configuracion_dta_t  task_configuracion_dta;
+extern task_configuration_dta_t  task_configuracion_dta;
 
 /********************** external functions declaration ***********************/
 
@@ -109,6 +109,6 @@ extern task_setup_dta_t        task_setup_dta;
 }
 #endif
 
-#endif /* TASK_INC_TASK_MENU_ATTRIBUTE_H_ */
+#endif  // TASK_INC_TASK_MENU_ATTRIBUTE_H
 
 /********************** end of file ******************************************/

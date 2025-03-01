@@ -46,8 +46,8 @@
 /* Application & Tasks includes. */
 #include "board.h"
 #include "task_sensor.h"
-#include "task_menu.h"
-#include "task_adc.h"
+#include "task_setup.h"
+//#include "task_adc.h"
 #include "task_actuator.h"
 #include "task_system.h"
 
@@ -74,7 +74,7 @@ typedef struct {
 const task_cfg_t task_cfg_list[]	= {
 
 		{task_sensor_init,	task_sensor_update, 	NULL},
-		{task_adc_init,     task_adc_update,        NULL},
+		/*{task_adc_init,     task_adc_update,        NULL},*/
 		{task_system_init,	task_system_update,		NULL},
 		{task_setup_init,	task_setup_update, 		NULL},
 		{task_actuator_init, task_actuator_update, 	NULL}
@@ -103,7 +103,7 @@ void app_init(void)
 {
 	uint32_t index;
 
-	 Print out: Application Initialized
+
 	LOGGER_LOG("\r\n");
 	LOGGER_LOG("%s is running - Tick [mS] = %d\r\n", GET_NAME(app_init), (int)HAL_GetTick());
 
@@ -175,7 +175,6 @@ void HAL_SYSTICK_Callback(void)
 	g_task_system_tick_cnt++;
 	g_task_actuator_tick_cnt++;
 
-	//HAL_GPIO_TogglePin(LED_A_PORT, LED_A_PIN);
 }
 
 /********************** end of file ******************************************/
