@@ -217,10 +217,10 @@ void task_setup_update(void *parameters)
 
 							displayCharPositionWrite(0, 0);
 						 	displayStringWrite(menu_str);
-						 	snprintf(menu_str, sizeof(menu_str), "MAX PERSONS:%u",CANTIDAD_PERSONAS_CFG_01);
+						 	snprintf(menu_str, sizeof(menu_str), "MAX PERSONS:%ul",CANTIDAD_PERSONAS_CFG_01);
 						 	displayCharPositionWrite(0, 1);
 						 	displayStringWrite(menu_str);
-						 	snprintf(menu_str, sizeof(menu_str), "WAIT TIME:%u",TIMER_CFG_01);
+						 	snprintf(menu_str, sizeof(menu_str), "WAIT TIME:%ul",TIMER_CFG_01);
 						 	p_task_setup_dta->state = ST_SETUP_CFG_01;
 
 						break;

@@ -51,6 +51,7 @@
 #include "task_system_interface.h"
 #include "task_actuator_attribute.h"
 #include "task_actuator_interface.h"
+#include "task_adc_interface.h"
 
 /********************** macros and definitions *******************************/
 #define G_TASK_SYS_CNT_INI			0ul
@@ -76,6 +77,10 @@ const char *p_task_system_ 		= "Non-Blocking & Update By Time Code";
 /********************** external data declaration ****************************/
 uint32_t g_task_system_cnt;
 volatile uint32_t g_task_system_tick_cnt;
+uint32_t temp_amb_raw=0;
+uint32_t temp_uC_raw=0;
+uint32_t temp_amb=0;
+uint32_t temp_uC=0;
 
 /********************** external functions definition ************************/
 void task_system_init(void *parameters)
@@ -162,6 +167,15 @@ void task_system_update(void *parameters)
 			p_task_system_dta->event = get_event_task_system(); //Aca levanto los eventos generados por los sensores
 		}
 
+		if( true == any_value_task_adc())
+		{
+				temp_uC_raw  = get_value_task_adc();
+				temp_amb_raw = get_value_task_adc();
+
+				temp_amb = (3.30 * 100 * temp_amb_raw)/(4096);
+				LOGGER_LOG("temp_uC_raw:%lu\r\n",temp_uC_raw);
+				LOGGER_LOG("temp_amb_raw:%lu\r\n",temp_amb);
+		}
 
 		switch (p_task_system_dta->state)
 		{
