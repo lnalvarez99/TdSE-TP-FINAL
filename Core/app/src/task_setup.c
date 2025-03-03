@@ -48,7 +48,7 @@
 #include "board.h"
 #include "app.h"
 #include "display.h"
-//#include "task_adc_interface.h"
+#include "task_adc_interface.h"
 #include "task_setup_interface.h"
 #include "task_system_attribute.h"
 #include "task_setup_attribute.h"

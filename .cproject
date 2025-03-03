@@ -51,6 +51,9 @@
 									<listOptionValue builtIn="false" value="&quot;C:\Users\lauta\STM32CubeIDE\workspace_1.16.0\tdse-proyecto-final\Core\Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\Users\lauta\STM32CubeIDE\workspace_1.16.0\tdse-proyecto-final\Core\Src&quot;"/>
 									<listOptionValue builtIn="false" value="../Core/Inc"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\lauta\STM32CubeIDE\workspace_1.16.0\tdse-proyecto-final\Core\app\src&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\lauta\STM32CubeIDE\workspace_1.16.0\tdse-proyecto-final\Core\startup&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\Users\lauta\STM32CubeIDE\workspace_1.16.0\tdse-proyecto-final\Debug&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.2090919215" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

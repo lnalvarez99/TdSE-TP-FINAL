@@ -27,6 +27,7 @@ Core/app/src/task_setup.o: ../Core/app/src/task_setup.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/app/Inc/logger.h ../Core/app/Inc/dwt.h ../Core/app/Inc/board.h \
  ../Core/app/Inc/app.h ../Core/app/Inc/display.h \
+ ../Core/app/Inc/task_adc_interface.h \
  ../Core/app/Inc/task_setup_interface.h \
  ../Core/app/Inc/task_setup_attribute.h \
  ../Core/app/Inc/task_system_attribute.h \
@@ -62,6 +63,7 @@ C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f
 ../Core/app/Inc/board.h:
 ../Core/app/Inc/app.h:
 ../Core/app/Inc/display.h:
+../Core/app/Inc/task_adc_interface.h:
 ../Core/app/Inc/task_setup_interface.h:
 ../Core/app/Inc/task_setup_attribute.h:
 ../Core/app/Inc/task_system_attribute.h:
