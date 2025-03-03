@@ -90,7 +90,7 @@ void put_event_task_setup(task_setup_ev_t event)
 		queue_task_a.head = 0;
 }
 
-task_setup_ev_t get_event_task_menu(void)
+task_setup_ev_t get_event_task_setup(void)
 
 {
 	task_setup_ev_t event;

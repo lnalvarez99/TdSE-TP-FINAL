@@ -24,6 +24,7 @@
 #include "app.h"
 #include "board.h"
 #include <stdio.h>
+#include <stdint.h>
 
 /* USER CODE END Includes */
 

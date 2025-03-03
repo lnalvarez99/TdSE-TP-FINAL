@@ -44,25 +44,17 @@ extern "C" {
 #endif
 
 /********************** inclusions *******************************************/
-#define MAX_EVENTS 30
+
 /********************** macros ***********************************************/
 
-/********************** typedef **********************************************/
-typedef struct
-{
-    uint32_t head;              // Índice de inicio
-    uint32_t tail;              // Índice de fin
-    uint32_t count;             // Número de elementos en la cola
-    uint32_t queue[MAX_EVENTS]; // Buffer de datos
-} queue_task_adc_t;
-
 /********************** external data declaration ****************************/
+
 /********************** external functions declaration ***********************/
 extern void init_queue_value_task_adc(void);
 extern bool any_value_task_adc(void);
 extern uint32_t get_value_task_adc(void);
 extern void put_value_task_adc(uint32_t adc_value);
-extern queue_task_adc_t queue_task_adc;
+
 
 /********************** End of CPP guard *************************************/
 #ifdef __cplusplus
