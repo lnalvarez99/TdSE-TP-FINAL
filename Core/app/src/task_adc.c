@@ -53,8 +53,6 @@
 
 /********************** macros and definitions *******************************/
 
-#define AVERAGER_SIZE (15)
-
 /********************** internal data declaration ****************************/
 
 uint32_t averaged_temp_amb = 0;

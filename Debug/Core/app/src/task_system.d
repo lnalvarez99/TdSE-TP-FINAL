@@ -19,6 +19,8 @@ Core/app/src/task_system.o: ../Core/app/src/task_system.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
@@ -27,7 +29,8 @@ Core/app/src/task_system.o: ../Core/app/src/task_system.c \
  ../Core/app/Inc/app.h ../Core/app/Inc/task_system_attribute.h \
  ../Core/app/Inc/task_system_interface.h \
  ../Core/app/Inc/task_actuator_attribute.h \
- ../Core/app/Inc/task_actuator_interface.h
+ ../Core/app/Inc/task_actuator_interface.h \
+ ../Core/app/Inc/task_adc_interface.h
 C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f1xx_hal_conf.h:
@@ -48,6 +51,8 @@ C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
@@ -60,3 +65,4 @@ C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f
 ../Core/app/Inc/task_system_interface.h:
 ../Core/app/Inc/task_actuator_attribute.h:
 ../Core/app/Inc/task_actuator_interface.h:
+../Core/app/Inc/task_adc_interface.h:

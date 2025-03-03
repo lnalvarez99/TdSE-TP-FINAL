@@ -239,9 +239,7 @@ void task_system_update(void *parameters)
 							p_task_system_dta->state= ST_SYS_XX_STOP;
 					break;
 
-					case EV_SYS_BTN_INGRESO_IDLE:
-
-					break;
+					default: break;
 
 				} // fin del switch
 
@@ -315,7 +313,7 @@ void task_system_update(void *parameters)
 						}
 						if(p_task_system_dta->tick-- > p_task_system_dta->cantidad_personas)
 						{
-							put_event_task_acutator(EV_LED_XX_ON, ID_LED_MIN_VEL);
+							put_event_task_actuator(EV_LED_XX_ON, ID_LED_MIN_VEL);
 							put_event_task_actuator(EV_LED_XX_OFF, ID_LED_MAX_VEL);
 							p_task_system_dta->state = ST_SYS_XX_NORMAL;
 						}
@@ -333,6 +331,8 @@ void task_system_update(void *parameters)
 						p_task_system_dta->tick=0;
 						p_task_system_dta->state= ST_SYS_XX_STOP;
 						break;
+
+					default: break;
 				}
 			break;
 

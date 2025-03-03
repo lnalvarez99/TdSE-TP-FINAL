@@ -96,7 +96,7 @@ typedef enum task_sensor_id {ID_BTN_INGRESO,/*Entrada de persona a la escalera*/
 							 ID_BTN_EGRESO,/*Salida de persona de la escalera*/
 							 ID_BTN_NEXT,/*Next*/
 							 ID_BTN_ENTER,/*Enter*/
-							 ID_BTN_ON,/* Turn in (activar sistema)*/
+							 ID_BTN_ON,/* Turn on (activar sistema)*/
 							 ID_SWITCH_OFF,/* Turn off (desactivar sistema)*/
 							 ID_SWITCH_BIR /* Barrera infraroja*/} task_sensor_id_t;
 

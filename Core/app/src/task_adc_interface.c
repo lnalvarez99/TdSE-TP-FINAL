@@ -51,25 +51,16 @@
 
 /********************** macros and definitions *******************************/
 #define EVENT_UNDEFINED	(255)
-#define MAX_EVENTS		(5)
 
 /********************** internal data declaration ****************************/
 
 /********************** internal functions declaration ***********************/
 
 /********************** internal data definition *****************************/
-struct
-{
-	uint32_t	head;
-	uint32_t	tail;
-	uint32_t	count;
-	uint32_t	queue[MAX_EVENTS];
-} queue_task_adc;
 
 /********************** external data declaration ****************************/
 
 /********************** external functions definition ************************/
-queue_task_adc_t queue_task_adc;
 
 void init_queue_event_task_adc(void)
 {

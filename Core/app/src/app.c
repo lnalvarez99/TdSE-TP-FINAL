@@ -47,7 +47,7 @@
 #include "board.h"
 #include "task_sensor.h"
 #include "task_setup.h"
-//#include "task_adc.h"
+#include "task_adc.h"
 #include "task_actuator.h"
 #include "task_system.h"
 
@@ -74,7 +74,7 @@ typedef struct {
 const task_cfg_t task_cfg_list[]	= {
 
 		{task_sensor_init,	task_sensor_update, 	NULL},
-		/*{task_adc_init,     task_adc_update,        NULL},*/
+		{task_adc_init,     task_adc_update,        NULL},
 		{task_system_init,	task_system_update,		NULL},
 		{task_setup_init,	task_setup_update, 		NULL},
 		{task_actuator_init, task_actuator_update, 	NULL}

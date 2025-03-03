@@ -57,7 +57,6 @@ typedef struct
 } queue_task_adc_t;
 
 /********************** external data declaration ****************************/
-
 /********************** external functions declaration ***********************/
 extern void init_queue_value_task_adc(void);
 extern bool any_value_task_adc(void);

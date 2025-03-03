@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app.h"
+#include "board.h"
 #include <stdio.h>
 
 /* USER CODE END Includes */
@@ -282,14 +283,14 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|D12_Pin|D11_Pin|D7_Pin
-                          |D8_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, BUZZER_Pin|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8
+                          |GPIO_PIN_9|LED_SYSCTRL_DIS_Pin|LED_SYSCTRL_ACT_Pin|LED_MIN_VEL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(D9_GPIO_Port, D9_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, LED_MAX_VEL_Pin|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(D10_GPIO_Port, D10_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -297,42 +298,42 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : BTN_IN_PIN_Pin */
-  GPIO_InitStruct.Pin = BTN_IN_PIN_Pin;
+  /*Configure GPIO pin : BTN_INGRESO_Pin */
+  GPIO_InitStruct.Pin = BTN_INGRESO_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BTN_IN_PIN_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(BTN_INGRESO_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin D12_Pin D11_Pin D7_Pin
-                           D8_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|D12_Pin|D11_Pin|D7_Pin
-                          |D8_Pin;
+  /*Configure GPIO pins : BUZZER_Pin PA6 PA7 PA8
+                           PA9 LED_SYSCTRL_DIS_Pin LED_SYSCTRL_ACT_Pin LED_MIN_VEL_Pin */
+  GPIO_InitStruct.Pin = BUZZER_Pin|GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8
+                          |GPIO_PIN_9|LED_SYSCTRL_DIS_Pin|LED_SYSCTRL_ACT_Pin|LED_MIN_VEL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BTN_OUT_PIN_Pin BTN_ENT_PIN_Pin BTN_NEX_PIN_Pin BTN_TIN_PIN_Pin
-                           SWITCH_BIR_PIN_Pin SWITCH_TOF_PIN_Pin */
-  GPIO_InitStruct.Pin = BTN_OUT_PIN_Pin|BTN_ENT_PIN_Pin|BTN_NEX_PIN_Pin|BTN_TIN_PIN_Pin
-                          |SWITCH_BIR_PIN_Pin|SWITCH_TOF_PIN_Pin;
+  /*Configure GPIO pins : BTN_EGRESO_Pin BTN_ENTER_Pin BTN_NEXT_Pin BTN_ON_Pin
+                           SWITCH_BARINF_Pin SWITCH_OFF_Pin */
+  GPIO_InitStruct.Pin = BTN_EGRESO_Pin|BTN_ENTER_Pin|BTN_NEXT_Pin|BTN_ON_Pin
+                          |SWITCH_BARINF_Pin|SWITCH_OFF_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : D9_Pin */
-  GPIO_InitStruct.Pin = D9_Pin;
+  /*Configure GPIO pins : LED_MAX_VEL_Pin PC9 */
+  GPIO_InitStruct.Pin = LED_MAX_VEL_Pin|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(D9_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : D10_Pin */
-  GPIO_InitStruct.Pin = D10_Pin;
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(D10_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
