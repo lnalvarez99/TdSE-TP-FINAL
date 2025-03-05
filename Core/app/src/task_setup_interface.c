@@ -51,7 +51,7 @@
 
 /********************** macros and definitions *******************************/
 #define EVENT_UNDEFINED	(255)
-#define MAX_EVENTS		(5)
+#define MAX_EVENTS		(30)
 
 /********************** internal data declaration ****************************/
 

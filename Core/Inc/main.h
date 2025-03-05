@@ -80,20 +80,20 @@ void Error_Handler(void);
 #define SWITCH_BARINF_GPIO_Port GPIOB
 #define SWITCH_OFF_Pin GPIO_PIN_14
 #define SWITCH_OFF_GPIO_Port GPIOB
-#define LED_MAX_VEL_Pin GPIO_PIN_7
-#define LED_MAX_VEL_GPIO_Port GPIOC
 #define LED_SYSCTRL_DIS_Pin GPIO_PIN_10
 #define LED_SYSCTRL_DIS_GPIO_Port GPIOA
-#define LED_SYSCTRL_ACT_Pin GPIO_PIN_11
-#define LED_SYSCTRL_ACT_GPIO_Port GPIOA
-#define LED_MIN_VEL_Pin GPIO_PIN_12
-#define LED_MIN_VEL_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
+#define LED_MIN_VEL_Pin GPIO_PIN_4
+#define LED_MIN_VEL_GPIO_Port GPIOB
+#define LED_SYSCTRL_ACT_Pin GPIO_PIN_5
+#define LED_SYSCTRL_ACT_GPIO_Port GPIOB
+#define LED_MAX_VEL_Pin GPIO_PIN_8
+#define LED_MAX_VEL_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

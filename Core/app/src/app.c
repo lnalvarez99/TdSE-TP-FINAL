@@ -154,7 +154,7 @@ void app_update(void)
 
 			cycle_counter = cycle_counter_get();
 			cycle_counter_time_us = cycle_counter_time_us();
-			//HAL_GPIO_TogglePin(LED_A_PORT, LED_A_PIN);
+			//HAL_GPIO_TogglePin(LED_A_PORT, LED_A_PIN);0
 
 			/* Update variables */
 	    	g_app_time_us += cycle_counter_time_us;

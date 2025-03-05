@@ -182,6 +182,7 @@ void task_system_update(void *parameters)
 
 			case ST_SYS_XX_IDLE:
 			{
+
 				p_task_system_dta->flag = false;
 				switch(p_task_system_dta->event)
 				{

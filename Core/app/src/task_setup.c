@@ -55,6 +55,7 @@
 
 
 /********************** macros and definitions *******************************/
+
 #define G_TASK_MEN_CNT_INI			0ul
 #define G_TASK_MEN_TICK_CNT_INI		0ul
 
@@ -66,16 +67,19 @@
 #define TIMER_CFG_01			   30ul
 #define CANTIDAD_PERSONAS_CFG_02   20ul
 #define TIMER_CFG_02			   45ul
+
 /********************** internal data declaration ****************************/
+
 task_setup_dta_t task_setup_dta = {DEL_MEN_XX_MIN, ST_SETUP_IDLE, EV_SETUP_BTN_ENTER_IDLE, false, false};
 
-task_configuration_dta_t task_configuracion_dta = {0,0};
+task_configuration_dta_t task_configuracion_dta = {NULL,NULL};
 
 #define SETUP_DTA_QTY	(sizeof(task_setup_dta)/sizeof(task_setup_dta_t))
 
 /********************** internal functions declaration ***********************/
 
 /********************** internal data definition *****************************/
+
 const char *p_task_menu 		= "Task Menu (Interactive Menu)";
 const char *p_task_menu_ 		= "Non-Blocking & Update By Time Code";
 
@@ -87,9 +91,9 @@ uint32_t temp_uC=0;
 */
 
 /********************** external data declaration ****************************/
+
 uint32_t g_task_menu_cnt;
 volatile uint32_t g_task_menu_tick_cnt;
-
 
 
 /********************** external functions definition ************************/
@@ -136,7 +140,9 @@ void task_setup_update(void *parameters)
 	task_system_dta_t *p_task_system_dta;
 
 	bool b_time_update_required = false;
-    char menu_str[128] = {0};
+    char menu_str[16];
+    memset(menu_str, 0, sizeof(menu_str));
+
 
 	g_task_menu_cnt++;
 
@@ -217,10 +223,10 @@ void task_setup_update(void *parameters)
 
 							displayCharPositionWrite(0, 0);
 						 	displayStringWrite(menu_str);
-						 	snprintf(menu_str, sizeof(menu_str), "MAX PERSONS:%ul",CANTIDAD_PERSONAS_CFG_01);
+						 	snprintf(menu_str, sizeof(menu_str), "MAX PERSONS:%lu",CANTIDAD_PERSONAS_CFG_01);
 						 	displayCharPositionWrite(0, 1);
 						 	displayStringWrite(menu_str);
-						 	snprintf(menu_str, sizeof(menu_str), "WAIT TIME:%ul",TIMER_CFG_01);
+						 	snprintf(menu_str, sizeof(menu_str), "WAIT TIME:%lu",TIMER_CFG_01);
 						 	p_task_setup_dta->state = ST_SETUP_CFG_01;
 
 						break;
@@ -321,7 +327,7 @@ void task_setup_update(void *parameters)
 							case EV_SETUP_BTN_ENTER_ACTIVE:
 
 								displayCharPositionWrite(0, 0);
-								snprintf(menu_str, sizeof(menu_str), "MAX PERSONS: %lu,CANTIDAD_PERSONAS_CFG_02");
+								snprintf(menu_str, sizeof(menu_str), "MAX PERSONS: %lu",CANTIDAD_PERSONAS_CFG_02);
 								displayStringWrite(menu_str);
 								displayCharPositionWrite(0, 1);
 								snprintf(menu_str, sizeof(menu_str), "WAIT TIME: %lu",TIMER_CFG_02);
@@ -375,13 +381,12 @@ void task_setup_update(void *parameters)
 				break; //Fin case ST_SETUP_CFG_02
 
 				case ST_SETUP_IDLE:
-
+					snprintf(menu_str, sizeof(menu_str),"Hola mundo");
 					displayCharPositionWrite(0, 0);
-					//snprintf(menu_str, sizeof(menu_str), "PRESS ENTER TO"); Aca van a ir los valores de la temperatura
 					displayStringWrite(menu_str);
+					/*snprintf(menu_str, sizeof(menu_str), "MP = %lu WT = %lu",p_task_system_dta->cantidad_personas, p_task_system_dta->timer);
 					displayCharPositionWrite(0, 1);
-					snprintf(menu_str, sizeof(menu_str), "MP = %lu WT = %lu",p_task_system_dta->cantidad_personas, p_task_system_dta->timer);
-					displayStringWrite(menu_str);
+					displayStringWrite(menu_str);*/
 					if(EV_SETUP_BTN_NEXT_ACTIVE == p_task_setup_dta->event)
 					{
 						p_task_setup_dta->flag = false;
