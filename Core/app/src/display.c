@@ -3,6 +3,7 @@
 /********************** inclusions *******************************************/
 #include "display.h"
 #include "board.h"
+#include "main.h"
 #include "stm32f1xx_hal.h"
 #include <stdbool.h>
 /********************** arm_book Defines *******************************/

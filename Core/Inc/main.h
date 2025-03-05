@@ -68,6 +68,10 @@ void Error_Handler(void);
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
+#define D12_Pin GPIO_PIN_6
+#define D12_GPIO_Port GPIOA
+#define D11_Pin GPIO_PIN_7
+#define D11_GPIO_Port GPIOA
 #define BTN_EGRESO_Pin GPIO_PIN_1
 #define BTN_EGRESO_GPIO_Port GPIOB
 #define BTN_ENTER_Pin GPIO_PIN_10
@@ -80,6 +84,12 @@ void Error_Handler(void);
 #define SWITCH_BARINF_GPIO_Port GPIOB
 #define SWITCH_OFF_Pin GPIO_PIN_14
 #define SWITCH_OFF_GPIO_Port GPIOB
+#define D9_Pin GPIO_PIN_7
+#define D9_GPIO_Port GPIOC
+#define D7_Pin GPIO_PIN_8
+#define D7_GPIO_Port GPIOA
+#define D8_Pin GPIO_PIN_9
+#define D8_GPIO_Port GPIOA
 #define LED_SYSCTRL_DIS_Pin GPIO_PIN_10
 #define LED_SYSCTRL_DIS_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
@@ -92,6 +102,8 @@ void Error_Handler(void);
 #define LED_MIN_VEL_GPIO_Port GPIOB
 #define LED_SYSCTRL_ACT_Pin GPIO_PIN_5
 #define LED_SYSCTRL_ACT_GPIO_Port GPIOB
+#define D10_Pin GPIO_PIN_6
+#define D10_GPIO_Port GPIOB
 #define LED_MAX_VEL_Pin GPIO_PIN_8
 #define LED_MAX_VEL_GPIO_Port GPIOB
 

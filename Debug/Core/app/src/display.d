@@ -1,5 +1,6 @@
 Core/app/src/display.o: ../Core/app/src/display.c \
  ../Core/app/Inc/display.h ../Core/app/Inc/board.h \
+ C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -27,6 +28,7 @@ Core/app/src/display.o: ../Core/app/src/display.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 ../Core/app/Inc/display.h:
 ../Core/app/Inc/board.h:
+C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 C:/Users/lauta/STM32CubeIDE/workspace_1.16.0/tdse-proyecto-final/Core/Inc/stm32f1xx_hal_conf.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:

@@ -72,7 +72,7 @@
 
 task_setup_dta_t task_setup_dta = {DEL_MEN_XX_MIN, ST_SETUP_IDLE, EV_SETUP_BTN_ENTER_IDLE, false, false};
 
-task_configuration_dta_t task_configuracion_dta = {NULL,NULL};
+task_configuration_dta_t task_configuracion_dta = {0,0};
 
 #define SETUP_DTA_QTY	(sizeof(task_setup_dta)/sizeof(task_setup_dta_t))
 
@@ -94,6 +94,8 @@ uint32_t temp_uC=0;
 
 uint32_t g_task_menu_cnt;
 volatile uint32_t g_task_menu_tick_cnt;
+
+
 
 
 /********************** external functions definition ************************/
@@ -131,6 +133,7 @@ void task_setup_init(void *parameters)
 
     displayInit( DISPLAY_CONNECTION_GPIO_4BITS );
 
+
 	g_task_menu_tick_cnt = G_TASK_MEN_TICK_CNT_INI;
 }
 
@@ -140,9 +143,8 @@ void task_setup_update(void *parameters)
 	task_system_dta_t *p_task_system_dta;
 
 	bool b_time_update_required = false;
-    char menu_str[16];
-    memset(menu_str, 0, sizeof(menu_str));
-
+	char menu_str[16];
+	memset(menu_str, 0, sizeof(menu_str));
 
 	g_task_menu_cnt++;
 

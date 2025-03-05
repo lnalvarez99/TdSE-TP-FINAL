@@ -128,26 +128,6 @@ extern "C" {
 #define BUZZER_ON GPIO_PIN_SET
 #define BUZZER_OFF GPIO_PIN_RESET
 
-/******************************* DISPLAY *******************************************/
-
-#define D7_Pin GPIO_PIN_8
-#define D7_GPIO_Port GPIOA
-
-#define D8_Pin GPIO_PIN_9
-#define D8_GPIO_Port GPIOA
-
-#define D9_Pin GPIO_PIN_7
-#define D9_GPIO_Port GPIOC
-
-#define D10_Pin GPIO_PIN_6
-#define D10_GPIO_Port GPIOB
-
-#define D11_Pin GPIO_PIN_7
-#define D11_GPIO_Port GPIOA
-
-#define D12_Pin GPIO_PIN_6
-#define D12_GPIO_Port GPIOA
-
 
 #endif/* STM32 Nucleo Boards - 144 Pins */
 

@@ -1,6 +1,6 @@
-../Core/app/src/display.c:114:6:displayInit	16	static
-../Core/app/src/display.c:199:6:displayCharPositionWrite	16	static
-../Core/app/src/display.c:236:6:displayStringWrite	16	static
-../Core/app/src/display.c:243:13:displayCodeWrite	16	static
-../Core/app/src/display.c:252:13:displayPinWrite	16	static
-../Core/app/src/display.c:331:13:displayDataBusWrite	16	static
+../Core/app/src/display.c:115:6:displayInit	16	static
+../Core/app/src/display.c:200:6:displayCharPositionWrite	16	static
+../Core/app/src/display.c:237:6:displayStringWrite	16	static
+../Core/app/src/display.c:244:13:displayCodeWrite	16	static
+../Core/app/src/display.c:253:13:displayPinWrite	16	static
+../Core/app/src/display.c:332:13:displayDataBusWrite	16	static
